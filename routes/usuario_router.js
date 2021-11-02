@@ -53,10 +53,10 @@ usuarioRouter.route('/') //takes an ednpoint as parameter
     res.end('Method not supported on /usuarios.\nPlease use POST or GET'); 
 });
 
-usuarioRouter.route('/:usuarioID')
+usuarioRouter.route('/:rfc')
 .options((req,res) => {res.sendStatus(200)})
 .get((req,res,next)=>{
-    Usuarios.findById(req.params.usuarioID)
+    Usuarios.findOne( { rfc : req.params.rfc } )
     .then((usuario) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -66,10 +66,10 @@ usuarioRouter.route('/:usuarioID')
 })
 .post((req,res) =>{
     req.statusCode = 403;
-    res.end('POST is not available in /usuarios/'+req.params.usuarioID);
+    res.end('POST is not available in /usuarios/'+req.params.rfc);
 })
 .put((req,res,next) =>{
-    Usuarios.findByIdAndUpdate(req.params.usuarioID,{$set:req.body},{new:true})
+    Usuarios.findOneAndUpdate({ rfc : req.params.rfc },{$set:req.body},{new:true})
     .then((usuario) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -78,14 +78,17 @@ usuarioRouter.route('/:usuarioID')
     .catch((err) => next(err));
 })
 .delete((req, res, next) => {
-    Usuarios.findByIdAndRemove(req.params.usuarioID)
+    Usuarios.findOneAndRemove( { rfc : req.params.rfc } )
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(resp);
     }, (err) => next(err))
     .catch((err) => next(err));
+})
+.all((req,res,next) => {
+    res.statusCode = 403;
+    res.end('Method not supported on /usuarios/'+req.params.rfc); 
 });
-
 
 module.exports = usuarioRouter; 

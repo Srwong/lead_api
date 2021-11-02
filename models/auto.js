@@ -6,8 +6,9 @@ var autoSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'  //model
     },
-    _id: {
-        type:String
+    autoLeadID: {
+        type: String,
+        unique: Boolean
     },
     modelo: {
         type: String

@@ -8,16 +8,8 @@ autoRouter.use(BodyParser.json());
 
 //declare the endpoint to a single location and chain the rest
 autoRouter.route('/') //takes an ednpoint as parameter
-/*
-//.all is chained to the router
-//as we are chaining to all we dont need to declare the endpoint in the params
-.all((req, res, next) =>{ //( endpoint, callback ) 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    next(); //continue for aditional specificacions that match the path
-})
-*/
-.get((req,res,next) => {//this recieves the req and res from .all
+
+.get((req,res,next) => {
     Autos.find({})
     .populate('usuarioID')
     .then((autos) => {
@@ -29,7 +21,7 @@ autoRouter.route('/') //takes an ednpoint as parameter
 })
 
 .post((req,res,next) => { 
-    console.log(erq.body);
+    console.log(req.body);
     
     Autos.create(req.body)
     .then((auto) =>{
@@ -48,12 +40,16 @@ autoRouter.route('/') //takes an ednpoint as parameter
 .delete((req, res, next) => {
     res.statusCode = 403;
     res.end('DELETE is not supported on /autos');  
+})
+.all((req,res,next) => {
+    res.statusCode = 403;
+    res.end('Method not supported on /autos.\nPlease use POST or GET'); 
 });
 
 autoRouter.route('/:autoID')
 .options((req,res) => {res.sendStatus(200)})
 .get((req,res,next)=>{
-    Autos.findById(req.params.autoID)
+    Autos.findOne({autoLeadID : req.params.autoID})
     .then((auto) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -66,7 +62,7 @@ autoRouter.route('/:autoID')
     res.end('POST is not available in /autos/'+req.params.autoID);
 })
 .put((req,res,next) =>{
-    Autos.findByIdAndUpdate(req.params.autoID,{$set:req.body},{new:true})
+    Autos.findOneAndUpdate({ autoLeadID : req.params.autoID },{$set:req.body},{new:true})
     .then((auto) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -75,13 +71,17 @@ autoRouter.route('/:autoID')
     .catch((err) => next(err));
 })
 .delete((req, res, next) => {
-    Autos.findByIdAndRemove(req.params.autoID)
+    Autos.findOneAndRemove({autoLeadID : req.params.autoID})
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(resp);
     }, (err) => next(err))
     .catch((err) => next(err));
+})
+.all((req,res,next) => {
+    res.statusCode = 403;
+    res.end('Method not supported on /autos/'+req.params._id); 
 });
 
 
