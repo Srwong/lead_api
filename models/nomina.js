@@ -6,14 +6,15 @@ var nominaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'  //model
     },
-    _id: {
+    nominaLeadID: {
         type:String
     },
     empresa: {
         type: String
     },
     ingreso: {
-        type: Date
+        type: Date,
+        required:true
     },
     status:{
         type: Boolean
