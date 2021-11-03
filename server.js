@@ -5,12 +5,14 @@ let express = require('express'),
 //apis
 var indexRouter = require('./routes/index');
 var autoRouter = require('./routes/auto_router');
+var casaRouter = require('./routes/casa_router');
 var usuarioRouter = require('./routes/usuario_router');
 
 
 
 const mongoose = require('mongoose');
 const Autos = require('./models/auto');
+//const Casas = require('./models/casa');
 const Usuarios = require('./models/usuario');
 
 
@@ -35,6 +37,8 @@ app.use(bodyParser.urlencoded({
 app.use('/', indexRouter);
 app.use('/autos', autoRouter);
 app.use('/usuarios', usuarioRouter);
+app.use('/casas', casaRouter);
+
 
 
 

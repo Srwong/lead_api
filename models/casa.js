@@ -9,7 +9,7 @@ var casaSchema = new Schema({
     casaLeadID: {
         type:String,
         unique: true,
-        reqiuired: true
+        required: true
     },
     domicilio: {
         type: String,

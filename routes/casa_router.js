@@ -25,7 +25,7 @@ casaRouter.route('/') //takes an ednpoint as parameter
     /////////////////////////////////////////
     ////////// APPLY LOGIC TO DISMISS ///////
     /////////////////////////////////////////
-    if(req.body.precio >= 200000 && req.body.precio <= 500000)
+    if(req.body.domicilio.includes('ciudad de México') || req.body.domicilio.includes('estado de México'))
         req.body.status = true;
     else
         req.body.status = false;
