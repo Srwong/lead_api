@@ -8,13 +8,16 @@ var autoSchema = new Schema({
     },
     autoLeadID: {
         type: String,
-        unique: Boolean
+        unique: true,
+        required: true
     },
     modelo: {
-        type: String
+        type: String,
+        required: true
     },
     precio: {
-        type: Number
+        type: Number,
+        required: true
     },
     status:{
         type: Boolean

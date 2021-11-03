@@ -21,7 +21,16 @@ autoRouter.route('/') //takes an ednpoint as parameter
 })
 
 .post((req,res,next) => { 
-    console.log(req.body);
+
+    /////////////////////////////////////////
+    ////////// APPLY LOGIC TO DISMISS ///////
+    /////////////////////////////////////////
+    if(req.body.precio >= 200000 && req.body.precio <= 500000)
+        req.body.status = true;
+    else
+        req.body.status = false;
+
+    /////////////////////////////////////////
     
     Autos.create(req.body)
     .then((auto) =>{
@@ -31,6 +40,7 @@ autoRouter.route('/') //takes an ednpoint as parameter
         res.json(auto);
     }, (err) => next(err))
     .catch((err) => next(err));
+    
 })
 
 .put((req,res,next) =>{
@@ -46,10 +56,10 @@ autoRouter.route('/') //takes an ednpoint as parameter
     res.end('Method not supported on /autos.\nPlease use POST or GET'); 
 });
 
-autoRouter.route('/:autoID')
+autoRouter.route('/:leadID')
 .options((req,res) => {res.sendStatus(200)})
 .get((req,res,next)=>{
-    Autos.findOne({autoLeadID : req.params.autoID})
+    Autos.findOne( { autoLeadID : req.params.leadID } )
     .then((auto) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -59,10 +69,10 @@ autoRouter.route('/:autoID')
 })
 .post((req,res) =>{
     req.statusCode = 403;
-    res.end('POST is not available in /autos/'+req.params.autoID);
+    res.end('POST is not available in /autos/'+req.params.leadID);
 })
 .put((req,res,next) =>{
-    Autos.findOneAndUpdate({ autoLeadID : req.params.autoID },{$set:req.body},{new:true})
+    Autos.findOneAndUpdate({ autoLeadID : req.params.leadID },{$set:req.body},{new:true})
     .then((auto) =>{
         res.statusCode = 200;
         res.contentType('Content-Type','application/json');
@@ -71,7 +81,7 @@ autoRouter.route('/:autoID')
     .catch((err) => next(err));
 })
 .delete((req, res, next) => {
-    Autos.findOneAndRemove({autoLeadID : req.params.autoID})
+    Autos.findOneAndRemove({ autoLeadID : req.params.leadID } )
     .then((resp) => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
