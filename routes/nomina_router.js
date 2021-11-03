@@ -78,8 +78,7 @@ nominaRouter.route('/:leadID')
     res.end('POST is not available in /nominas/'+req.params.leadID);
 })
 .put((req,res,next) =>{
-    console.log(typeof(req.body.ingreso));
-    req.body.ingreso = new Date(req.body.ingreso);
+    req.body.ingreso = new Date(req.body.ingreso); //set back to date type
     Nomina.findOneAndUpdate({ nominaLeadID : req.params.leadID },{$set:req.body},{new:true})
     .then((nomina) =>{
         res.statusCode = 200;
