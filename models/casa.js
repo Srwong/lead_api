@@ -6,14 +6,18 @@ var casaSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Usuario'  //model
     },
-    _id: {
-        type:String
+    casaLeadID: {
+        type:String,
+        unique: true,
+        reqiuired: true
     },
     domicilio: {
-        type: String
+        type: String,
+        required: true,
     },
     valor: {
-        type: Number
+        type: Number,
+        required: true
     },
     status:{
         type: Boolean
