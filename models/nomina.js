@@ -7,7 +7,8 @@ var nominaSchema = new Schema({
         ref: 'Usuario'  //model
     },
     nominaLeadID: {
-        type:String
+        type:String,
+        unique:true
     },
     empresa: {
         type: String

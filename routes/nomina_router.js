@@ -24,13 +24,20 @@ nominaRouter.route('/') //takes an ednpoint as parameter
 
     /////////////////////////////////////////
     ////////// APPLY LOGIC TO DISMISS ///////
+    // could separate day, month and year to perform substractions separately.
     /////////////////////////////////////////
-    if(req.body.domicilio.includes('ciudad de México') || req.body.domicilio.includes('estado de México'))
+    req.body.ingreso = date = new Date(req.body.ingreso); //convert to Date type
+    let now = new Date; //today
+
+    var difference= Math.abs(date-now); //substract in miliseconds
+    days = difference/(1000 * 3600 * 24) //convert to days
+
+    if(days >= 420) // 14 months == 14 * 30 == 420 days
         req.body.status = true;
     else
-        req.body.status = false;
+        req.body.status = false; //less than 14 months is rejected
 
-    /////////////////////////////////////////
+    ///////////////////////////////////////////
     
     Nomina.create(req.body)
     .then((nomina) =>{
@@ -39,8 +46,7 @@ nominaRouter.route('/') //takes an ednpoint as parameter
         res.setHeader('Content-Type','application/json');
         res.json(nomina);
     }, (err) => next(err))
-    .catch((err) => next(err));
-    
+    .catch((err) => next(err));    
 })
 
 .put((req,res,next) =>{

@@ -7,14 +7,9 @@ var indexRouter = require('./routes/index');
 var autoRouter = require('./routes/auto_router');
 var casaRouter = require('./routes/casa_router');
 var usuarioRouter = require('./routes/usuario_router');
-
-
+var nominaRouter = require('./routes/nomina_router');
 
 const mongoose = require('mongoose');
-const Autos = require('./models/auto');
-//const Casas = require('./models/casa');
-const Usuarios = require('./models/usuario');
-
 
 const url = "mongodb+srv://lead_admin:lead_admin@leaddb.jcbxk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const connect = mongoose.connect(url);
@@ -38,6 +33,8 @@ app.use('/', indexRouter);
 app.use('/autos', autoRouter);
 app.use('/usuarios', usuarioRouter);
 app.use('/casas', casaRouter);
+app.use('/nominas', nominaRouter);
+
 
 
 
