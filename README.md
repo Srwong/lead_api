@@ -10,7 +10,7 @@ This an API that allows you to create users named "usuarios" and create leads fo
 
 This was build with [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) due to the ease of use, implementation and time available. 
 
-Mongo in this implementation is using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/try2?utm_content=controlhterms&utm_source=google&utm_campaign=gs_americas_mexico_search_core_brand_atlas_desktop&utm_term=mongo&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624326&adgroup=115749706303), to reduce the necessary space for our docker container and separate the api service from the database service. 
+Mongo in this implementation is using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/lp/try2?utm_content=controlhterms&utm_source=google&utm_campaign=gs_americas_mexico_search_core_brand_atlas_desktop&utm_term=mongo&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624326&adgroup=115749706303), to reduce the necessary space for our docker container and separate the api service from the database service. The downside, is that we need to create manually the relationship between leads and users.
 
 ## Usage
 
