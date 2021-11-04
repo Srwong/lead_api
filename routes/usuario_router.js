@@ -31,7 +31,7 @@ usuarioRouter.route('/') //takes an ednpoint as parameter
     console.log(req.body);
     Usuarios.create(req.body)
     .then((usuario) =>{
-        console.log('Auto created',usuario);
+        console.log('Usuario created',usuario);
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json');
         res.json(usuario);
@@ -54,26 +54,28 @@ usuarioRouter.route('/') //takes an ednpoint as parameter
 });
 
 usuarioRouter.route('/:rfc')
+/*
 .options((req,res) => {res.sendStatus(200)})
+*/
 .get((req,res,next)=>{
     Usuarios.findOne( { rfc : req.params.rfc } )
     .then((usuario) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
-        res.json(usuario)
+        res.setHeader('Content-Type','application/json');
+        res.json(usuario);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req,res) =>{
-    req.statusCode = 403;
+    res.statusCode = 403;
     res.end('POST is not available in /usuarios/'+req.params.rfc);
 })
 .put((req,res,next) =>{
     Usuarios.findOneAndUpdate({ rfc : req.params.rfc },{$set:req.body},{new:true})
     .then((usuario) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
-        res.json(usuario)
+        res.setHeader('Content-Type','application/json');
+        res.json(usuario);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
