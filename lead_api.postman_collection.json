@@ -1,0 +1,567 @@
+{
+	"info": {
+		"_postman_id": "97e7cc40-96d2-427f-aba6-b6694641de65",
+		"name": "lead_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "usuarios",
+			"item": [
+				{
+					"name": "all_usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Sergio\",\r\n    \"email\":\"sergio@gmail.com\",\r\n    \"telefono\":\"3333333333\",\r\n    \"domicilio\":\"tlaxcala\",\r\n    \"rfc\":\"fty123456xyz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/usuarios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/usuarios/:rfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios",
+								":rfc"
+							],
+							"variable": [
+								{
+									"key": "rfc",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_usuario_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Alex\",\r\n    \"email\":\"alex@gmail.com\",\r\n    \"telefono\":\"4444444444\",\r\n    \"domicilio\":\"cdmx\",\r\n    \"rfc\":\"cdmf123456xyz\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/usuarios/:rfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios",
+								":rfc"
+							],
+							"variable": [
+								{
+									"key": "rfc",
+									"value": "abc123456xyz"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/usuarios/:rfc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"usuarios",
+								":rfc"
+							],
+							"variable": [
+								{
+									"key": "rfc",
+									"value": "fty123456xyz"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "autos",
+			"item": [
+				{
+					"name": "all_autos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/autos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"autos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_auto",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/autos/:autoLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"autos",
+								":autoLeadID"
+							],
+							"variable": [
+								{
+									"key": "autoLeadID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_auto_lead",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioID\":\"6181b1ace4ed6ff566be9e53\",\r\n    \"autoLeadID\":\"4\",\r\n    \"modelo\":\"swift\",\r\n    \"precio\":200000\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/autos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"autos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_auto_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"autoLeadID\": \"3\",\r\n    \"modelo\": \"tesla\",\r\n    \"precio\": 2000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/autos/:autoLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"autos",
+								":autoLeadID"
+							],
+							"variable": [
+								{
+									"key": "autoLeadID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_auto_lead",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/autos/:autoLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"autos",
+								":autoLeadID"
+							],
+							"variable": [
+								{
+									"key": "autoLeadID",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "casas",
+			"item": [
+				{
+					"name": "all_casas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/casas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"casas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_casa_lead",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioID\":\"6181a8954c7423a67db89f1b\",\r\n    \"casaLeadID\":\"4\",\r\n    \"domicilio\":\"tlaxcala, tlaxcala \",\r\n    \"valor\":2000000\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/casas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"casas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_casa_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"casaLeadID\":\"2\",\r\n    \"domicilio\":\"tlaxcala, tlaxcala \",\r\n    \"valor\":2000000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/casas/:casaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"casas",
+								":casaLeadID"
+							],
+							"variable": [
+								{
+									"key": "casaLeadID",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_casa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/casas/:casaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"casas",
+								":casaLeadID"
+							],
+							"variable": [
+								{
+									"key": "casaLeadID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_casa_lead",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/casas/:casaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"casas",
+								":casaLeadID"
+							],
+							"variable": [
+								{
+									"key": "casaLeadID",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nominas",
+			"item": [
+				{
+					"name": "all_nominas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/nominas",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"nominas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_nomina",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/nominas/:nominaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"nominas",
+								":nominaLeadID"
+							],
+							"variable": [
+								{
+									"key": "nominaLeadID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add_nomina",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioID\":\"6181a8954c7423a67db89f1b\",\r\n    \"nominaLeadID\":\"3\",\r\n    \"empresa\":\"empresa3\",\r\n    \"ingreso\":\"01/01/20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/nominas/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"nominas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "single_nomina_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nominaLeadID\": \"3\",\r\n    \"empresa\": \"jghj\",\r\n    \"ingreso\": \"12/12/12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/nominas/:nominaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"nominas",
+								":nominaLeadID"
+							],
+							"variable": [
+								{
+									"key": "nominaLeadID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove_nomina_lead",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/nominas/:nominaLeadID",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"nominas",
+								":nominaLeadID"
+							],
+							"variable": [
+								{
+									"key": "nominaLeadID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
