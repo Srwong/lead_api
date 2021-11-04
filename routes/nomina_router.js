@@ -41,7 +41,7 @@ nominaRouter.route('/') //takes an ednpoint as parameter
     
     Nomina.create(req.body)
     .then((nomina) =>{
-        console.log('Auto created',nomina);
+        console.log('Nomina created',nomina);
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json');
         res.json(nomina);
@@ -68,13 +68,13 @@ nominaRouter.route('/:leadID')
     Nomina.findOne( { nominaLeadID : req.params.leadID } )
     .then((nomina) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(nomina)
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req,res) =>{
-    req.statusCode = 403;
+    res.statusCode = 403;
     res.end('POST is not available in /nominas/'+req.params.leadID);
 })
 .put((req,res,next) =>{
@@ -82,7 +82,7 @@ nominaRouter.route('/:leadID')
     Nomina.findOneAndUpdate({ nominaLeadID : req.params.leadID },{$set:req.body},{new:true})
     .then((nomina) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(nomina)
     }, (err) => next(err))
     .catch((err) => next(err));

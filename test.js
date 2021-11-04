@@ -226,7 +226,7 @@ describe('DELETE request on autos: ',()=>{
 
 
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////  autos/{autoLeadID} /////////////////////////////
+////////////////////////  autos/{autoLeadID} /////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
 // POST /autos/{autoLeadID}
@@ -394,7 +394,7 @@ describe('DELETE request on casas: ',()=>{
 
 
 //////////////////////////////////////////////////////////////////////////
-////////////////////////////  casas/{casaLeadID} /////////////////////////////
+////////////////////////  casas/{casaLeadID} /////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 
 // POST /casas/{casaLeadID}
@@ -452,7 +452,7 @@ describe('Update a specific casa lead: ',()=>{
     });
 });
 
-// DELETE /casas/{rfc}
+// DELETE /casas/{casaLeadID}
 describe('Delete a specific casa lead: ',()=>{
     it('Should delete casa lead 5', (done) => {
     chai.request(url)
@@ -466,7 +466,7 @@ describe('Delete a specific casa lead: ',()=>{
     });
 });
 
-// DELETE /casas/{rfc}
+// DELETE /casas/{casaLeadID}
 describe('Delete a specific casa lead: ',()=>{
     it('Should delete casa lead 6', (done) => {
     chai.request(url)
@@ -480,3 +480,169 @@ describe('Delete a specific casa lead: ',()=>{
 });
 
 
+//////////////////////////////////////////////////////////////////////////
+/////////////////////////////  Nominas ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /nominas
+describe('Add a new nomina lead: ',()=>{
+    it('should add a new nomina lead as rejected', (done) => {
+    chai.request(url)
+    .post('/nominas')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "nominaLeadID":"5",
+        "empresa":"empresa1",
+        "ingreso":"01/01/21"
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(false);
+    done(); });
+    });
+});
+
+// POST /nominas
+describe('Add a new nomina lead: ',()=>{
+    it('should add a new nomina lead as accepted', (done) => {
+    chai.request(url)
+    .post('/nominas')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "nominaLeadID":"6",
+        "empresa":"empresa2",
+        "ingreso":"12/15/19"
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(true);
+
+    done(); });
+    });
+});
+
+// GET /nominas
+describe('Get all nomina leads: ',()=>{
+    it('Should get nominas lead list', (done) => {
+    chai.request(url)
+    .get('/nominas')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    done(); });
+    });
+});
+
+// PUT /nominas
+describe('PUT request on nominas: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .put('/nominas')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// DELETE /nominas
+describe('DELETE request on nominas: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .del('/nominas')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////  nominas/{nominaLeadID} /////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /nominas/{nominaLeadID}
+describe('POST method on /nominas/{nominaLeadID}: ',()=>{
+    it('Should fail', (done) => {
+    chai.request(url)
+    .post('/nominas/5')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "nominaLeadID":"7",
+        "empresa":"empresa3",
+        "ingreso":"06/01/18"
+    })
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// GET /nominas/{nominaLeadID}
+describe('Get single nomina lead: ',()=>{
+    it('Should get nomina lead with nominaLeadID 5', (done) => {
+    chai.request(url)
+    .get('/nominas/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('nominaLeadID').to.be.equal('5');
+    done(); });
+    });
+});
+
+
+// PUT /nominas/{nominaLeadID}
+describe('Update a specific nomina lead: ',()=>{
+    it('Should change empresa to empresa3 and ingreso to Monterrey, Nuevo Leon', (done) => {
+    chai.request(url)
+    .put('/nominas/5')
+    .send({
+        "nominaLeadID":"5",
+        "empresa":"empresa3",
+        "ingreso":"05/05/20"
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('nominaLeadID').to.be.equal('5');
+    expect(res.body).to.have.property('empresa').to.be.equal("empresa3");
+    expect(res.body).to.have.property('ingreso').to.include("2020-05-05");
+
+    done(); });
+    });
+});
+
+// DELETE /nominas/{nominaLeadID}
+describe('Delete a specific nomina lead: ',()=>{
+    it('Should delete nomina lead 5', (done) => {
+    chai.request(url)
+    .del('/nominas/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('nominaLeadID').to.be.equal('5');
+
+    done(); });
+    });
+});
+
+// DELETE /nominas/{nominaLeadID}
+describe('Delete a specific nomina lead: ',()=>{
+    it('Should delete nomina lead 6', (done) => {
+    chai.request(url)
+    .del('/nominas/6')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('nominaLeadID').to.be.equal('6');
+    done(); });
+    });
+});
