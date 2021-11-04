@@ -22,7 +22,7 @@ If the documentation and examples are not enought to understand the usability of
 
 1. Clone the repository.
 2. Get into the directory.
-3. Open a terminal in the same directory as these files and run the following commands to install the libraries
+3. Open a terminal in the same directory as these files and run the command `npm install` to install all the libraries or the following commands just to make the API work.
   - `npm install express --save`
   - `npm install body-parser --save`
   - `npm install mongoose --save`
@@ -45,6 +45,26 @@ After successfully running the API, you would be able to use the endpoints. The 
 2. /autos
 3. /casas
 4. /nominas
+
+## Testing
+
+For testing I used [Chai](https://www.chaijs.com/), [Chai HTTP](https://www.chaijs.com/plugins/chai-http/)(to enable HTTP methods) and [Mocha](https://mochajs.org/). 
+
+To run the test you only need the server running.
+
+### API running in server
+1. Install missing libraries if you did not ussed `npm install`.
+  - `npm install chai --save`
+  - `npm install chai-http --save`
+  - `npm install mocha --save`
+2. Start the server with `node server` or `npm start`.
+3. In other terminal, use the command `npm test`.
+
+
+### API running in docker container
+1. Start the docker container.
+2. Run the command `docker exec -it CONTAINER_ID bash` to get into the container.
+3. Run command `npm test`.
 
 ## Usuarios endpoint
 
