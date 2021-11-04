@@ -21,6 +21,10 @@ The solution has 4 main endpoints:
 
 ## Usage
 
+To use this api you have two options. Directly executing the code on your machine or use a docker container.
+
+### Local machine execution
+
 1. Clone the repository.
 2. Get into the directory.
 3. Open a terminal in the same directory as these files and run the following commands to install the libraries
@@ -28,6 +32,13 @@ The solution has 4 main endpoints:
   - `npm install body-parser --save`
   - `npm install mongoose --save`
 4. Start the server running `node srver.js`. It will be using port 5000.
+
+### Docker container
+
+1. Clone the repository.
+2. Get into the directory.
+3. Run the command `docker build -t IMAGE_NAME:TAG .`. This command will create the image using dockerfile within the repository. You can create your own image if desired. IMAGE_NAME is the name for the new image and TAG is used as a version, an example could be `lead_api/node:v1.0`
+4. To run a container use command `docker run -d -p HOST_PORT:5000 IMAGE_NAME:TAG`. HOST_PORT will be the port you are willing to use on your server.
 
 ## Usuario endpoint
 
