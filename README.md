@@ -38,7 +38,7 @@ If the documentation and examples are not enought to understand the usability of
 ### Use the existent docker container
 
 1. Open a terminal.
-2. Run the command `docker run -d -p HOST_PORT:5000 srwong/lead_api:1.0`. **HOST_PORT** will be the port you are willing to use on your machine running docker.
+2. Run the command `docker run -d -p HOST_PORT:5000 srwong/lead_api:1.1`. **HOST_PORT** will be the port you are willing to use on your machine running docker.
 
 After successfully running the API, you would be able to use the endpoints. The solution has 4 main endpoints:
 1. /usuarios
@@ -48,7 +48,7 @@ After successfully running the API, you would be able to use the endpoints. The 
 
 ## Testing
 
-For testing I used [Chai](https://www.chaijs.com/), [Chai HTTP](https://www.chaijs.com/plugins/chai-http/)(to enable HTTP methods) and [Mocha](https://mochajs.org/). 
+For testing I used [Chai](https://www.chaijs.com/) (as assertion library), [Chai HTTP](https://www.chaijs.com/plugins/chai-http/) (to enable HTTP methods) and [Mocha](https://mochajs.org/) (as testing framework). 
 
 To run the test you only need the server running.
 
