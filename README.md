@@ -63,8 +63,8 @@ To run the test you only need the server running.
 
 ### API running in docker container
 1. Start the docker container.
-2. Run the command `docker exec -it CONTAINER_ID bash` to get into the container.
-3. Run command `npm test`.
+2. Run the command `docker exec -it CONTAINER_ID bash` to get into the container and run `npm test`.
+3. If you only wish to run the test, you can use command `docker exec 1971d7cafd0b npm test`.
 
 ## Usuarios endpoint
 
