@@ -34,7 +34,7 @@ casaRouter.route('/') //takes an ednpoint as parameter
     
     Casa.create(req.body)
     .then((casa) =>{
-        console.log('Auto created',casa);
+        console.log('Casa created',casa);
         res.statusCode = 200;
         res.setHeader('Content-Type','application/json');
         res.json(casa);
@@ -62,20 +62,20 @@ casaRouter.route('/:leadID')
     Casa.findOne( { casaLeadID : req.params.leadID } )
     .then((casa) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(casa)
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req,res) =>{
-    req.statusCode = 403;
+    res.statusCode = 403;
     res.end('POST is not available in /casas/'+req.params.leadID);
 })
 .put((req,res,next) =>{
     Casa.findOneAndUpdate({ casaLeadID : req.params.leadID },{$set:req.body},{new:true})
     .then((casa) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(casa)
     }, (err) => next(err))
     .catch((err) => next(err));

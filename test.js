@@ -149,7 +149,7 @@ describe('Delete a specific user: ',()=>{
 
 // POST /autos
 describe('Add a new auto lead: ',()=>{
-    it('should add a new auto lead', (done) => {
+    it('should add a new auto lead as accepted', (done) => {
     chai.request(url)
     .post('/autos')
     .send({
@@ -168,7 +168,7 @@ describe('Add a new auto lead: ',()=>{
 
 // POST /autos
 describe('Add a new auto lead: ',()=>{
-    it('should add a new auto lead', (done) => {
+    it('should add a new auto lead as rejected', (done) => {
     chai.request(url)
     .post('/autos')
     .send({
@@ -283,7 +283,7 @@ describe('Update a specific auto lead: ',()=>{
     });
 });
 
-// DELETE /autos/{rfc}
+// DELETE /autos/{autoLeadID}
 describe('Delete a specific auto lead: ',()=>{
     it('Should delete auto lead 5', (done) => {
     chai.request(url)
@@ -297,7 +297,7 @@ describe('Delete a specific auto lead: ',()=>{
     });
 });
 
-// DELETE /autos/{rfc}
+// DELETE /autos/{autoLeadID}
 describe('Delete a specific auto lead: ',()=>{
     it('Should delete auto lead 6', (done) => {
     chai.request(url)
@@ -309,3 +309,174 @@ describe('Delete a specific auto lead: ',()=>{
     done(); });
     });
 });
+
+
+//////////////////////////////////////////////////////////////////////////
+///////////////////////////////  Casas ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /casas
+describe('Add a new casa lead: ',()=>{
+    it('should add a new casa lead as rejected', (done) => {
+    chai.request(url)
+    .post('/casas')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "casaLeadID":"5",
+        "domicilio":"tlaxcala, tlaxcala ",
+        "valor":2000000
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(false);
+    done(); });
+    });
+});
+
+// POST /casas
+describe('Add a new casa lead: ',()=>{
+    it('should add a new casa lead as accepted', (done) => {
+    chai.request(url)
+    .post('/casas')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "casaLeadID":"6",
+        "domicilio":"Miguel Hidalgo, ciudad de México ",
+        "valor":5000000
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(true);
+
+    done(); });
+    });
+});
+
+// GET /casas
+describe('Get all casa leads: ',()=>{
+    it('Should get casas lead list', (done) => {
+    chai.request(url)
+    .get('/casas')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    done(); });
+    });
+});
+
+// PUT /casas
+describe('PUT request on casas: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .put('/casas')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// DELETE /casas
+describe('DELETE request on casas: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .del('/casas')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+
+//////////////////////////////////////////////////////////////////////////
+////////////////////////////  casas/{casaLeadID} /////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /casas/{casaLeadID}
+describe('POST method on /casas/{casaLeadID}: ',()=>{
+    it('Should fail', (done) => {
+    chai.request(url)
+    .post('/casas/5')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "casaLeadID":"7",
+        "domicilio":"Monterrey, Nuevo Leon",
+        "valor":3000000
+    })
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// GET /casas/{casaLeadID}
+describe('Get single casa lead: ',()=>{
+    it('Should get casa lead with casaLeadID 5', (done) => {
+    chai.request(url)
+    .get('/casas/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('casaLeadID').to.be.equal('5');
+    done(); });
+    });
+});
+
+
+// PUT /casas/{casaLeadID}
+describe('Update a specific casa lead: ',()=>{
+    it('Should change valor to 3000000 and domicilio to Monterrey, Nuevo Leon', (done) => {
+    chai.request(url)
+    .put('/casas/5')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "casaLeadID":"5",
+        "domicilio":"Monterrey, Nuevo Leon",
+        "valor":3000000
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('casaLeadID').to.be.equal('5');
+    expect(res.body).to.have.property('domicilio').to.be.equal("Monterrey, Nuevo Leon");
+    expect(res.body).to.have.property('valor').to.be.equal(3000000);
+
+    done(); });
+    });
+});
+
+// DELETE /casas/{rfc}
+describe('Delete a specific casa lead: ',()=>{
+    it('Should delete casa lead 5', (done) => {
+    chai.request(url)
+    .del('/casas/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('casaLeadID').to.be.equal('5');
+
+    done(); });
+    });
+});
+
+// DELETE /casas/{rfc}
+describe('Delete a specific casa lead: ',()=>{
+    it('Should delete casa lead 6', (done) => {
+    chai.request(url)
+    .del('/casas/6')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('casaLeadID').to.be.equal('6');
+    done(); });
+    });
+});
+
+
