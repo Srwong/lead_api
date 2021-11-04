@@ -62,20 +62,20 @@ autoRouter.route('/:leadID')
     Autos.findOne( { autoLeadID : req.params.leadID } )
     .then((auto) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(auto)
     }, (err) => next(err))
     .catch((err) => next(err));
 })
 .post((req,res) =>{
-    req.statusCode = 403;
+    res.statusCode = 403;
     res.end('POST is not available in /autos/'+req.params.leadID);
 })
 .put((req,res,next) =>{
     Autos.findOneAndUpdate({ autoLeadID : req.params.leadID },{$set:req.body},{new:true})
     .then((auto) =>{
         res.statusCode = 200;
-        res.contentType('Content-Type','application/json');
+        res.setHeader('Content-Type','application/json');
         res.json(auto)
     }, (err) => next(err))
     .catch((err) => next(err));

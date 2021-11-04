@@ -135,16 +135,177 @@ describe('Delete a specific user: ',()=>{
     it('Should delete user with rfc 123456789xyz', (done) => {
     chai.request(url)
     .del('/usuarios/123456789xyz')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('rfc').to.be.equal('123456789xyz');
+    done(); });
+    });
+});
+
+//////////////////////////////////////////////////////////////////////////
+///////////////////////////////  Autos ///////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /autos
+describe('Add a new auto lead: ',()=>{
+    it('should add a new auto lead', (done) => {
+    chai.request(url)
+    .post('/autos')
     .send({
-        nombre:"usuario1",
-        email:"usuario1@gmail.com",
-        telefono:"5555555555",
-        domicilio:"cdmx",
-        rfc:"123456789xyz"
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "autoLeadID":"5",
+        "modelo":"jeep",
+        "precio":300000
     })
     .end( function(err,res){
     console.log(res.body);
     expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(true);
+    done(); });
+    });
+});
+
+// POST /autos
+describe('Add a new auto lead: ',()=>{
+    it('should add a new auto lead', (done) => {
+    chai.request(url)
+    .post('/autos')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "autoLeadID":"6",
+        "modelo":"tesla",
+        "precio":1200000
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('status').to.be.equal(false);
+
+    done(); });
+    });
+});
+
+// GET /autos
+describe('Get all auto leads: ',()=>{
+    it('Should get autos lead list', (done) => {
+    chai.request(url)
+    .get('/autos')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    done(); });
+    });
+});
+
+// PUT /autos
+describe('PUT request on autos: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .put('/autos')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// DELETE /autos
+describe('DELETE request on autos: ',()=>{
+    it('should fail', (done) => {
+    chai.request(url)
+    .del('/autos')
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+
+//////////////////////////////////////////////////////////////////////////
+////////////////////////////  autos/{autoLeadID} /////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+// POST /autos/{autoLeadID}
+describe('POST method on /autos/{autoLeadID}: ',()=>{
+    it('Should fail', (done) => {
+    chai.request(url)
+    .post('/autos/5')
+    .send({
+        "usuarioID":"6181a8644c7423a67db89f16",
+        "autoLeadID":"7",
+        "modelo":"tesla",
+        "precio":1234567
+    })
+    .end( function(err,res){
+    console.log(res.text);
+    console.log("status code: "+res.status);
+    expect(res).to.have.status(403);
+    done(); });
+    });
+});
+
+// GET /autos/{autoLeadID}
+describe('Get single auto lead: ',()=>{
+    it('Should get auto lead with autoLeadID 5', (done) => {
+    chai.request(url)
+    .get('/autos/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('autoLeadID').to.be.equal('5');
+    done(); });
+    });
+});
+
+
+// PUT /autos/{autoLeadID}
+describe('Update a specific auto lead: ',()=>{
+    it('Should change modelo to bmw and precio to 700000', (done) => {
+    chai.request(url)
+    .put('/autos/5')
+    .send({
+        "autoLeadID":"5",
+        "modelo":"bmw",
+        "precio":700000
+    })
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('autoLeadID').to.be.equal('5');
+    expect(res.body).to.have.property('modelo').to.be.equal("bmw");
+    expect(res.body).to.have.property('precio').to.be.equal(700000);
+
+    done(); });
+    });
+});
+
+// DELETE /autos/{rfc}
+describe('Delete a specific auto lead: ',()=>{
+    it('Should delete auto lead 5', (done) => {
+    chai.request(url)
+    .del('/autos/5')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('autoLeadID').to.be.equal('5');
+
+    done(); });
+    });
+});
+
+// DELETE /autos/{rfc}
+describe('Delete a specific auto lead: ',()=>{
+    it('Should delete auto lead 6', (done) => {
+    chai.request(url)
+    .del('/autos/6')
+    .end( function(err,res){
+    console.log(res.body);
+    expect(res).to.have.status(200);
+    expect(res.body).to.have.property('autoLeadID').to.be.equal('6');
     done(); });
     });
 });
